@@ -1,0 +1,109 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Страница-1" id="wfuagKeRKcKsx1fO1mpe">
+    <mxGraphModel dx="934" dy="529" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="MSMBLlsTpkodudxfGVXI-28" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="User" vertex="1">
+          <mxGeometry height="182" width="140" x="210" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-29" parent="MSMBLlsTpkodudxfGVXI-28" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="# id: UUID" vertex="1">
+          <mxGeometry height="26" width="140" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-30" parent="MSMBLlsTpkodudxfGVXI-28" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="* username: String" vertex="1">
+          <mxGeometry height="26" width="140" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-31" parent="MSMBLlsTpkodudxfGVXI-28" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="* email: String" vertex="1">
+          <mxGeometry height="26" width="140" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-32" parent="MSMBLlsTpkodudxfGVXI-28" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ name: String" vertex="1">
+          <mxGeometry height="26" width="140" y="104" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-33" parent="MSMBLlsTpkodudxfGVXI-28" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ surname: String" vertex="1">
+          <mxGeometry height="26" width="140" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-34" parent="MSMBLlsTpkodudxfGVXI-28" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ phone_number" vertex="1">
+          <mxGeometry height="26" width="140" y="156" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-36" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Fundraising" vertex="1">
+          <mxGeometry height="130" width="140" x="596" y="206" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-37" parent="MSMBLlsTpkodudxfGVXI-36" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="# id: UUID" vertex="1">
+          <mxGeometry height="26" width="140" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-38" parent="MSMBLlsTpkodudxfGVXI-36" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="* name: String" vertex="1">
+          <mxGeometry height="26" width="140" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-39" parent="MSMBLlsTpkodudxfGVXI-36" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="* goal: BigDecimal" vertex="1">
+          <mxGeometry height="26" width="140" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-40" parent="MSMBLlsTpkodudxfGVXI-36" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ description: String" vertex="1">
+          <mxGeometry height="26" width="140" y="104" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-44" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Donation" vertex="1">
+          <mxGeometry height="104" width="140" x="210" y="488" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-45" parent="MSMBLlsTpkodudxfGVXI-44" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="# id: UUID" vertex="1">
+          <mxGeometry height="26" width="140" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-46" parent="MSMBLlsTpkodudxfGVXI-44" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="* sum: BigDecimal" vertex="1">
+          <mxGeometry height="26" width="140" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-47" parent="MSMBLlsTpkodudxfGVXI-44" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ description: String" vertex="1">
+          <mxGeometry height="26" width="140" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-49" edge="1" parent="1" source="MSMBLlsTpkodudxfGVXI-28" style="endArrow=block;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=top;rounded=0;defaultLabelBackgroundColor=gap;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="MSMBLlsTpkodudxfGVXI-44" value="donated">
+          <mxGeometry relative="1" x="-0.3016" y="5" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="307" y="381" as="sourcePoint" />
+            <mxPoint x="467" y="381" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-50" connectable="0" parent="MSMBLlsTpkodudxfGVXI-49" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;defaultLabelBackgroundColor=gap;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="3" y="19" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-51" connectable="0" parent="MSMBLlsTpkodudxfGVXI-49" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;defaultLabelBackgroundColor=gap;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="2" y="117" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-52" edge="1" parent="1" source="MSMBLlsTpkodudxfGVXI-28" style="endArrow=block;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=top;rounded=0;defaultLabelBackgroundColor=gap;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="MSMBLlsTpkodudxfGVXI-36" value="created">
+          <mxGeometry relative="1" x="-0.1951" y="23" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="307" y="381" as="sourcePoint" />
+            <mxPoint x="467" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-53" connectable="0" parent="MSMBLlsTpkodudxfGVXI-52" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;defaultLabelBackgroundColor=gap;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="5" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-54" connectable="0" parent="MSMBLlsTpkodudxfGVXI-52" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;defaultLabelBackgroundColor=gap;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="222" y="-6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-55" edge="1" parent="1" source="MSMBLlsTpkodudxfGVXI-44" style="endArrow=block;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=top;rounded=0;defaultLabelBackgroundColor=gap;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="MSMBLlsTpkodudxfGVXI-36" value="belongs to">
+          <mxGeometry relative="1" x="-0.3846" y="27" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="307" y="381" as="sourcePoint" />
+            <mxPoint x="467" y="381" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-56" connectable="0" parent="MSMBLlsTpkodudxfGVXI-55" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;defaultLabelBackgroundColor=gap;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="4" y="-4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MSMBLlsTpkodudxfGVXI-57" connectable="0" parent="MSMBLlsTpkodudxfGVXI-55" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;defaultLabelBackgroundColor=gap;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="286" y="-183" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
