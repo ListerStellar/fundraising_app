@@ -1,10 +1,10 @@
 package io.github.listerstellar.fundrising.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -21,25 +21,18 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotNull(message = "Username can't be blank")
-    @Size(max = 100, message = "Username can have maximum 100 symbols")
     @Column(nullable = false, unique = true, length = 100)
     private String username;
 
-    @NotNull(message = "Email can't be blank")
-    @Size(max = 254, message = "Email can have maximum 254 symbols")
     @Column(nullable = false, unique = true, length = 254)
     private String email;
 
-    @Size(min = 1, max = 100, message = "First name can have minimum 1 and maximum 100 symbols")
     @Column(length = 100)
     private String firstName;
 
-    @Size(min = 1, max = 100, message = "Second name can have minimum 1 and maximum 100 symbols")
     @Column(length = 100)
     private String lastName;
 
-    @Size(min = 3, max = 20, message = "Phone number can have minimum 3 and maximum 20 digits")
     @Column(length = 20)
     private String phoneNumber;
 
@@ -49,7 +42,18 @@ public class Customer {
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "fundraising_id")
     )
-    private Set<Fundraising> favouriteFundraisings;
+    @Builder.Default
+    private Set<Fundraising> favouriteFundraisings = new HashSet<>();
+
+    public void addFavouriteFundraising(Fundraising fundraising) {
+        this.favouriteFundraisings.add(fundraising);
+        fundraising.getFavouredByCustomers().add(this);
+    }
+
+    public void removeFavouriteFundraising(Fundraising fundraising) {
+        this.favouriteFundraisings.remove(fundraising);
+        fundraising.getFavouredByCustomers().remove(this);
+    }
 
     @Override
     public boolean equals(Object o) {
