@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -45,8 +45,8 @@ public class User {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "favourite_user_fundraising",
-            joinColumns = @JoinColumn(name = "user_id"),
+            name = "favourite_customer_fundraising",
+            joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "fundraising_id")
     )
     private Set<Fundraising> favouriteFundraisings;
@@ -54,8 +54,8 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(getId(), user.getId());
+        Customer customer = (Customer) o;
+        return Objects.equals(getId(), customer.getId());
     }
 
     @Override

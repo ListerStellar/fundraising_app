@@ -1,3 +1,10 @@
 spring:
   application:
     name: fundrising
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true # Zobrazení SQL dotazů v konzoli (pro učební účely)
+    properties:
+      hibernate:
+        format_sql: true # Zobrazení SQL dotazů v konzoli (pro učební účely)

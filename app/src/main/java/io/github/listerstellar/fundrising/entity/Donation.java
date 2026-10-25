@@ -38,7 +38,7 @@ public class Donation {
     @NotNull(message = "Donation must have a donor")
     @ManyToOne(fetch = FetchType.LAZY,  optional = false)
     @JoinColumn(nullable = false)
-    private User donor;
+    private Customer donor;
 
     @NotNull(message = "Donation must belong to the fundraising")
     @ManyToOne(fetch = FetchType.LAZY,  optional = false)

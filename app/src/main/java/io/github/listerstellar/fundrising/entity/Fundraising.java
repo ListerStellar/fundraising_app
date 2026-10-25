@@ -40,10 +40,10 @@ public class Fundraising {
     @NotNull(message = "Fundraising must have a creator")
     @ManyToOne(fetch = FetchType.LAZY,  optional = false)
     @JoinColumn(nullable = false)
-    private User creator;
+    private Customer creator;
 
     @ManyToMany(mappedBy = "favouriteFundraisings", fetch = FetchType.LAZY)
-    private Set<User> favouriteUsers;
+    private Set<Customer> favouriteCustomers;
 
     @Override
     public boolean equals(Object o) {
