@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record DonationRequestDto(@NotNull
@@ -14,7 +13,7 @@ public record DonationRequestDto(@NotNull
                                  @Size(max = 1000, message = "Description can have maximum 10000 symbols")
                                  String description,
                                  @NotNull(message = "Donation must have a donor")
-                                 UUID donorId,
+                                 UUID customerId,
                                  @NotNull(message = "Donation must belong to the fundraising")
                                  UUID fundraisingId) {
 }

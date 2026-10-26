@@ -22,7 +22,7 @@ public class DonationMapper {
                 donation.getAmount(),
                 donation.getDonationDate(),
                 donation.getDescription(),
-                donation.getDonor().getId(),
+                donation.getCustomer().getId(),
                 donation.getFundraising().getId()
         );
     }
@@ -32,7 +32,7 @@ public class DonationMapper {
         return Donation.builder()
                 .amount(donationRequestDto.amount())
                 .description(donationRequestDto.description())
-                .donor(customerService.getCustomerEntityById(donationRequestDto.donorId()))
+                .customer(customerService.getCustomerEntityById(donationRequestDto.customerId()))
                 .fundraising(fundraisingService.getFundraisingEntityById(donationRequestDto.fundraisingId()))
                 .build();
     }

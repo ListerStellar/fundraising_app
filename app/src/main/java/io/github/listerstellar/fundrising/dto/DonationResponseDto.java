@@ -8,6 +8,6 @@ public record DonationResponseDto(UUID id,
                                   BigDecimal amount,
                                   LocalDateTime donationDate,
                                   String description,
-                                  UUID donorId,
+                                  UUID customerId,
                                   UUID fundraisingId) {
 }

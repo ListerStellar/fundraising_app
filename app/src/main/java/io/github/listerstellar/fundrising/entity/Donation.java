@@ -1,9 +1,6 @@
 package io.github.listerstellar.fundrising.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -36,7 +33,7 @@ public class Donation {
 
     @ManyToOne(fetch = FetchType.LAZY,  optional = false)
     @JoinColumn(nullable = false)
-    private Customer donor;
+    private Customer customer;
 
     @ManyToOne(fetch = FetchType.LAZY,  optional = false)
     @JoinColumn(nullable = false)

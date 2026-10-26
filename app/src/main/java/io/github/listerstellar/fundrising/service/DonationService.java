@@ -11,7 +11,7 @@ public interface DonationService {
 
     List<DonationResponseDto> getDonations();
 
-    List<DonationResponseDto> getDonationsByUserId(UUID userId);
+    List<DonationResponseDto> getDonationsByCustomerId(UUID CustomerId);
 
     List<DonationResponseDto> getDonationsByFundraisingId(UUID fundraisingId);
 
