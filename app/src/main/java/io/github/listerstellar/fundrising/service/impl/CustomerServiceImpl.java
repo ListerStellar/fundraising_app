@@ -2,15 +2,17 @@ package io.github.listerstellar.fundrising.service.impl;
 
 import io.github.listerstellar.fundrising.dto.CustomerRequestDto;
 import io.github.listerstellar.fundrising.dto.CustomerResponseDto;
+import io.github.listerstellar.fundrising.dto.FundraisingResponseDto;
 import io.github.listerstellar.fundrising.entity.Customer;
 import io.github.listerstellar.fundrising.entity.Fundraising;
 import io.github.listerstellar.fundrising.exception.CustomerAlreadyExistsException;
 import io.github.listerstellar.fundrising.exception.EntityNotFoundException;
 import io.github.listerstellar.fundrising.mapper.CustomerMapper;
+import io.github.listerstellar.fundrising.mapper.FundraisingMapper;
 import io.github.listerstellar.fundrising.repository.CustomerRepository;
 import io.github.listerstellar.fundrising.service.CustomerService;
 import io.github.listerstellar.fundrising.service.FundraisingService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,13 +21,14 @@ import java.util.UUID;
 
 @Service
 @Transactional
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
 
     private final FundraisingService fundraisingService;
+    private final FundraisingMapper fundraisingMapper;
 
     @Override
     @Transactional(readOnly = true)
@@ -76,14 +79,37 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerResponseDto updateCustomer(UUID customerId, CustomerRequestDto customerRequestDto) {
-        Customer customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new EntityNotFoundException("Customer", customerId.toString()));
+        Customer customer = getCustomerEntityById(customerId);
 
         if (!customer.getUsername().equals(customerRequestDto.username())
                 && customerRepository.existsByUsername(customerRequestDto.username())) {
             throw new CustomerAlreadyExistsException(customerRequestDto.username());
         }
         if (!customer.getEmail().equals(customerRequestDto.email())
+                && customerRepository.existsByEmail(customerRequestDto.email())) {
+            throw new CustomerAlreadyExistsException(customerRequestDto.email());
+        }
+
+        customer.setUsername(customerRequestDto.username());
+        customer.setEmail(customerRequestDto.email());
+        customer.setFirstName(customerRequestDto.firstName());
+        customer.setLastName(customerRequestDto.lastName());
+        customer.setPhoneNumber(customerRequestDto.phoneNumber());
+
+        return customerMapper.toDto(customerRepository.save(customer));
+    }
+
+    @Override
+    public CustomerResponseDto partialUpdateCustomer(UUID customerId, CustomerRequestDto customerRequestDto) {
+        Customer customer = getCustomerEntityById(customerId);
+
+        if (customerRequestDto.username() != null
+                && !customer.getUsername().equals(customerRequestDto.username())
+                && customerRepository.existsByUsername(customerRequestDto.username())) {
+            throw new CustomerAlreadyExistsException(customerRequestDto.username());
+        }
+        if (customerRequestDto.email() != null
+                && !customer.getEmail().equals(customerRequestDto.email())
                 && customerRepository.existsByEmail(customerRequestDto.email())) {
             throw new CustomerAlreadyExistsException(customerRequestDto.email());
         }
@@ -107,9 +133,17 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public List<FundraisingResponseDto> getFavouriteFundraisingsById(UUID customerId) {
+        Customer customer = getCustomerEntityById(customerId);
+
+        return customer.getFavouriteFundraisings().stream()
+                .map(fundraisingMapper::toDto)
+                .toList();
+    }
+
+    @Override
     public void addFavouriteFundraising(UUID customerId, UUID fundraisingId) {
-        Customer customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new EntityNotFoundException("Customer", customerId.toString()));
+        Customer customer = getCustomerEntityById(customerId);
 
         Fundraising fundraising = fundraisingService.getFundraisingEntityById(fundraisingId);
 
@@ -118,8 +152,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void removeFavouriteFundraising(UUID customerId, UUID fundraisingId) {
-        Customer customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new EntityNotFoundException("Customer", customerId.toString()));
+        Customer customer = getCustomerEntityById(customerId);
 
         Fundraising fundraising = fundraisingService.getFundraisingEntityById(fundraisingId);
 

@@ -11,7 +11,7 @@ import io.github.listerstellar.fundrising.repository.DonationRepository;
 import io.github.listerstellar.fundrising.service.CustomerService;
 import io.github.listerstellar.fundrising.service.DonationService;
 import io.github.listerstellar.fundrising.service.FundraisingService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +20,7 @@ import java.util.UUID;
 
 @Service
 @Transactional
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DonationServiceImpl implements DonationService {
 
     DonationRepository donationRepository;
@@ -51,6 +51,13 @@ public class DonationServiceImpl implements DonationService {
     }
 
     @Override
+    public List<DonationResponseDto> getDonationsByCustomerIdAndFundraisingId(UUID customerId, UUID fundraisingId) {
+        return donationRepository.findAllByCustomerIdAndFundraisingId(customerId, fundraisingId).stream()
+                .map(donationMapper::toDto)
+                .toList();
+    }
+
+    @Override
     public Donation getDonationEntityById(UUID donationId) {
         return donationRepository.findById(donationId)
                 .orElseThrow(() -> new EntityNotFoundException("Donation", donationId.toString()));
@@ -58,10 +65,7 @@ public class DonationServiceImpl implements DonationService {
 
     @Override
     public DonationResponseDto getDonationById(UUID donationId) {
-        return donationMapper.toDto(
-                donationRepository.findById(donationId)
-                        .orElseThrow(() -> new EntityNotFoundException("Donation", donationId.toString()))
-        );
+        return donationMapper.toDto(getDonationEntityById(donationId));
     }
 
     @Override
@@ -75,8 +79,21 @@ public class DonationServiceImpl implements DonationService {
 
     @Override
     public DonationResponseDto updateDonation(UUID donationId, DonationRequestDto donationRequestDto) {
-        Donation donation = donationRepository.findById(donationId)
-                .orElseThrow(() -> new EntityNotFoundException("Donation", donationId.toString()));
+        Donation donation = getDonationEntityById(donationId);
+        Customer customer = customerService.getCustomerEntityById(donationRequestDto.customerId());
+        Fundraising fundraising = fundraisingService.getFundraisingEntityById(donationRequestDto.fundraisingId());
+
+        donation.setCustomer(customer);
+        donation.setFundraising(fundraising);
+        donation.setAmount(donationRequestDto.amount());
+        donation.setDescription(donationRequestDto.description());
+
+        return donationMapper.toDto(donationRepository.save(donation));
+    }
+
+    @Override
+    public DonationResponseDto partialUpdateDonation(UUID donationId, DonationRequestDto donationRequestDto) {
+        Donation donation = getDonationEntityById(donationId);
 
         if (donationRequestDto.customerId() != null) {
             Customer customer = customerService.getCustomerEntityById(donationRequestDto.customerId());

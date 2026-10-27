@@ -5,7 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -26,7 +26,7 @@ public class Donation {
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
-    private LocalDateTime donationDate;
+    private Instant donationDate;
 
     @Column(length = 1000)
     private String description;

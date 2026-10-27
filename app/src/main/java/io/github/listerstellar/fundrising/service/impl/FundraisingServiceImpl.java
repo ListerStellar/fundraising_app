@@ -1,10 +1,12 @@
 package io.github.listerstellar.fundrising.service.impl;
 
+import io.github.listerstellar.fundrising.dto.CustomerResponseDto;
 import io.github.listerstellar.fundrising.dto.FundraisingRequestDto;
 import io.github.listerstellar.fundrising.dto.FundraisingResponseDto;
 import io.github.listerstellar.fundrising.entity.Customer;
 import io.github.listerstellar.fundrising.entity.Fundraising;
 import io.github.listerstellar.fundrising.exception.EntityNotFoundException;
+import io.github.listerstellar.fundrising.mapper.CustomerMapper;
 import io.github.listerstellar.fundrising.mapper.FundraisingMapper;
 import io.github.listerstellar.fundrising.repository.FundraisingRepository;
 import io.github.listerstellar.fundrising.service.CustomerService;
@@ -25,6 +27,7 @@ public class FundraisingServiceImpl implements FundraisingService {
     private final FundraisingMapper fundraisingMapper;
 
     private final CustomerService customerService;
+    private final CustomerMapper customerMapper;
 
     @Override
     public List<FundraisingResponseDto> getFundraisings() {
@@ -41,10 +44,7 @@ public class FundraisingServiceImpl implements FundraisingService {
 
     @Override
     public FundraisingResponseDto getFundraisingById(UUID fundraisingId) {
-        return fundraisingMapper.toDto(
-                fundraisingRepository.findById(fundraisingId)
-                        .orElseThrow(() -> new EntityNotFoundException("Fundraising", fundraisingId.toString()))
-        );
+        return fundraisingMapper.toDto(getFundraisingEntityById(fundraisingId));
     }
 
     @Override
@@ -58,8 +58,20 @@ public class FundraisingServiceImpl implements FundraisingService {
 
     @Override
     public FundraisingResponseDto updateFundraising(UUID fundraisingId, FundraisingRequestDto fundraisingRequestDto) {
-        Fundraising fundraising = fundraisingRepository.findById(fundraisingId)
-                .orElseThrow(() -> new EntityNotFoundException("Fundraising", fundraisingId.toString()));
+        Fundraising fundraising = getFundraisingEntityById(fundraisingId);
+        Customer customer = customerService.getCustomerEntityById(fundraisingRequestDto.creatorId());
+
+        fundraising.setCreator(customer);
+        fundraising.setName(fundraisingRequestDto.name());
+        fundraising.setGoal(fundraising.getGoal());
+        fundraising.setDescription(fundraisingRequestDto.description());
+
+        return fundraisingMapper.toDto(fundraisingRepository.save(fundraising));
+    }
+
+    @Override
+    public FundraisingResponseDto partialUpdateFundraising(UUID fundraisingId, FundraisingRequestDto fundraisingRequestDto) {
+        Fundraising fundraising = getFundraisingEntityById(fundraisingId);
 
         if (fundraisingRequestDto.creatorId() != null) {
             Customer customer = customerService.getCustomerEntityById(fundraisingRequestDto.creatorId());
@@ -78,5 +90,14 @@ public class FundraisingServiceImpl implements FundraisingService {
             throw new EntityNotFoundException("Fundraising", fundraisingId.toString());
         }
         fundraisingRepository.deleteById(fundraisingId);
+    }
+
+    @Override
+    public List<CustomerResponseDto> getFavouredByCustomersById(UUID fundraisingId) {
+        Fundraising fundraising = getFundraisingEntityById(fundraisingId);
+
+        return fundraising.getFavouredByCustomers().stream()
+                .map(customerMapper::toDto)
+                .toList();
     }
 }

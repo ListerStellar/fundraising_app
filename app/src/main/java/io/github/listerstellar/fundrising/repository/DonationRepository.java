@@ -10,5 +10,7 @@ public interface DonationRepository extends JpaRepository<Donation, UUID> {
     List<Donation> findAllByCustomerId(UUID customerId);
 
     List<Donation> findAllByFundraisingId(UUID fundraisingId);
+
+    List<Donation> findAllByCustomerIdAndFundraisingId(UUID customerId, UUID fundraisingId);
 }
 

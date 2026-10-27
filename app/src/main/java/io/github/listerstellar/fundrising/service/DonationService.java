@@ -15,6 +15,8 @@ public interface DonationService {
 
     List<DonationResponseDto> getDonationsByFundraisingId(UUID fundraisingId);
 
+    List<DonationResponseDto> getDonationsByCustomerIdAndFundraisingId(UUID customerId, UUID fundraisingId);
+
     Donation getDonationEntityById(UUID donationId);
 
     DonationResponseDto getDonationById(UUID donationId);
@@ -22,6 +24,8 @@ public interface DonationService {
     DonationResponseDto createDonation(DonationRequestDto donationRequestDto);
 
     DonationResponseDto updateDonation(UUID donationId, DonationRequestDto donationRequestDto);
+
+    DonationResponseDto partialUpdateDonation(UUID donationId, DonationRequestDto donationRequestDto);
 
     void deleteDonation(UUID donationId);
 }
