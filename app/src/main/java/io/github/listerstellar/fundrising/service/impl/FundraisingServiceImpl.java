@@ -1,12 +1,10 @@
 package io.github.listerstellar.fundrising.service.impl;
 
-import io.github.listerstellar.fundrising.dto.CustomerResponseDto;
 import io.github.listerstellar.fundrising.dto.FundraisingRequestDto;
 import io.github.listerstellar.fundrising.dto.FundraisingResponseDto;
 import io.github.listerstellar.fundrising.entity.Customer;
 import io.github.listerstellar.fundrising.entity.Fundraising;
 import io.github.listerstellar.fundrising.exception.EntityNotFoundException;
-import io.github.listerstellar.fundrising.mapper.CustomerMapper;
 import io.github.listerstellar.fundrising.mapper.FundraisingMapper;
 import io.github.listerstellar.fundrising.repository.FundraisingRepository;
 import io.github.listerstellar.fundrising.service.CustomerService;
@@ -27,7 +25,6 @@ public class FundraisingServiceImpl implements FundraisingService {
     private final FundraisingMapper fundraisingMapper;
 
     private final CustomerService customerService;
-    private final CustomerMapper customerMapper;
 
     @Override
     public List<FundraisingResponseDto> getFundraisings() {
@@ -51,7 +48,10 @@ public class FundraisingServiceImpl implements FundraisingService {
     public FundraisingResponseDto createFundraising(FundraisingRequestDto fundraisingRequestDto) {
         return fundraisingMapper.toDto(
                 fundraisingRepository.save(
-                        fundraisingMapper.toEntity(fundraisingRequestDto)
+                        fundraisingMapper.toEntity(
+                                fundraisingRequestDto,
+                                customerService.getCustomerEntityById(fundraisingRequestDto.creatorId())
+                        )
                 )
         );
     }
@@ -90,14 +90,5 @@ public class FundraisingServiceImpl implements FundraisingService {
             throw new EntityNotFoundException("Fundraising", fundraisingId.toString());
         }
         fundraisingRepository.deleteById(fundraisingId);
-    }
-
-    @Override
-    public List<CustomerResponseDto> getFavouredByCustomersById(UUID fundraisingId) {
-        Fundraising fundraising = getFundraisingEntityById(fundraisingId);
-
-        return fundraising.getFavouredByCustomers().stream()
-                .map(customerMapper::toDto)
-                .toList();
     }
 }

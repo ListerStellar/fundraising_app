@@ -1,6 +1,5 @@
 package io.github.listerstellar.fundrising.service;
 
-import io.github.listerstellar.fundrising.dto.CustomerResponseDto;
 import io.github.listerstellar.fundrising.dto.FundraisingRequestDto;
 import io.github.listerstellar.fundrising.dto.FundraisingResponseDto;
 import io.github.listerstellar.fundrising.entity.Fundraising;
@@ -23,6 +22,4 @@ public interface FundraisingService {
     FundraisingResponseDto partialUpdateFundraising(UUID fundraisingId, FundraisingRequestDto fundraisingRequestDto);
 
     void deleteFundraisingById(UUID fundraisingId);
-
-    List<CustomerResponseDto> getFavouredByCustomersById(UUID fundraisingId);
 }

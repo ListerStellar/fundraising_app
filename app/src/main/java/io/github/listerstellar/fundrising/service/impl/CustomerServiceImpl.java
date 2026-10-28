@@ -2,16 +2,12 @@ package io.github.listerstellar.fundrising.service.impl;
 
 import io.github.listerstellar.fundrising.dto.CustomerRequestDto;
 import io.github.listerstellar.fundrising.dto.CustomerResponseDto;
-import io.github.listerstellar.fundrising.dto.FundraisingResponseDto;
 import io.github.listerstellar.fundrising.entity.Customer;
-import io.github.listerstellar.fundrising.entity.Fundraising;
 import io.github.listerstellar.fundrising.exception.CustomerAlreadyExistsException;
 import io.github.listerstellar.fundrising.exception.EntityNotFoundException;
 import io.github.listerstellar.fundrising.mapper.CustomerMapper;
-import io.github.listerstellar.fundrising.mapper.FundraisingMapper;
 import io.github.listerstellar.fundrising.repository.CustomerRepository;
 import io.github.listerstellar.fundrising.service.CustomerService;
-import io.github.listerstellar.fundrising.service.FundraisingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,9 +22,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
-
-    private final FundraisingService fundraisingService;
-    private final FundraisingMapper fundraisingMapper;
 
     @Override
     @Transactional(readOnly = true)
@@ -130,32 +123,5 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         customerRepository.deleteById(customerId);
-    }
-
-    @Override
-    public List<FundraisingResponseDto> getFavouriteFundraisingsById(UUID customerId) {
-        Customer customer = getCustomerEntityById(customerId);
-
-        return customer.getFavouriteFundraisings().stream()
-                .map(fundraisingMapper::toDto)
-                .toList();
-    }
-
-    @Override
-    public void addFavouriteFundraising(UUID customerId, UUID fundraisingId) {
-        Customer customer = getCustomerEntityById(customerId);
-
-        Fundraising fundraising = fundraisingService.getFundraisingEntityById(fundraisingId);
-
-        customer.addFavouriteFundraising(fundraising);
-    }
-
-    @Override
-    public void removeFavouriteFundraising(UUID customerId, UUID fundraisingId) {
-        Customer customer = getCustomerEntityById(customerId);
-
-        Fundraising fundraising = fundraisingService.getFundraisingEntityById(fundraisingId);
-
-        customer.removeFavouriteFundraising(fundraising);
     }
 }

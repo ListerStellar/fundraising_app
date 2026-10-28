@@ -3,6 +3,7 @@ package io.github.listerstellar.fundrising.controller;
 import io.github.listerstellar.fundrising.dto.CustomerResponseDto;
 import io.github.listerstellar.fundrising.dto.FundraisingRequestDto;
 import io.github.listerstellar.fundrising.dto.FundraisingResponseDto;
+import io.github.listerstellar.fundrising.service.FavouriteService;
 import io.github.listerstellar.fundrising.service.FundraisingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.UUID;
 public class FundraisingController {
 
     private final FundraisingService fundraisingService;
+    private final FavouriteService favouriteService;
 
     @GetMapping
     public ResponseEntity<List<FundraisingResponseDto>> getFundraisings() {
@@ -55,6 +57,6 @@ public class FundraisingController {
 
     @GetMapping("/{id}/favoured")
     public ResponseEntity<List<CustomerResponseDto>> getFavouredByCustomersById(@PathVariable UUID id) {
-        return ResponseEntity.ok(fundraisingService.getFavouredByCustomersById(id));
+        return ResponseEntity.ok(favouriteService.getFavouredByCustomersByFundraisingId(id));
     }
 }

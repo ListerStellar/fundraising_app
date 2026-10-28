@@ -1,7 +1,6 @@
 package io.github.listerstellar.fundrising.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.util.HashSet;

@@ -4,6 +4,7 @@ import io.github.listerstellar.fundrising.dto.CustomerRequestDto;
 import io.github.listerstellar.fundrising.dto.CustomerResponseDto;
 import io.github.listerstellar.fundrising.dto.FundraisingResponseDto;
 import io.github.listerstellar.fundrising.service.CustomerService;
+import io.github.listerstellar.fundrising.service.FavouriteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.util.UUID;
 public class CustomerController {
 
     private final CustomerService customerService;
+    private final FavouriteService favouriteService;
 
     @GetMapping
     public ResponseEntity<List<CustomerResponseDto>> getCustomers() {
@@ -70,18 +72,18 @@ public class CustomerController {
 
     @GetMapping("/{id}/favourite")
     public ResponseEntity<List<FundraisingResponseDto>> getFavouriteFundraisingsById(@PathVariable UUID id) {
-        return ResponseEntity.ok(customerService.getFavouriteFundraisingsById(id));
+        return ResponseEntity.ok(favouriteService.getFavouriteFundraisingsByCustomerId(id));
     }
 
     @PostMapping("/{id}/favourite/{fundraisingId}")
     public ResponseEntity<Void> addFavouriteFundraising(@PathVariable UUID id, @PathVariable UUID fundraisingId) {
-        customerService.addFavouriteFundraising(id, fundraisingId);
+        favouriteService.addFavourite(id, fundraisingId);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}/favourite/{fundraisingId}")
     public ResponseEntity<Void> deleteFavouriteFundraising(@PathVariable UUID id, @PathVariable UUID fundraisingId) {
-        customerService.removeFavouriteFundraising(id, fundraisingId);
+        favouriteService.removeFavourite(id, fundraisingId);
         return ResponseEntity.noContent().build();
     }
 }

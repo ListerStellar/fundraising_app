@@ -1,6 +1,6 @@
 spring:
   application:
-    name: fundrising
+    name: fundraising
   jpa:
     hibernate:
       ddl-auto: update

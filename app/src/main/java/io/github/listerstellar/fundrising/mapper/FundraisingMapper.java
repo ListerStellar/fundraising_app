@@ -4,7 +4,6 @@ import io.github.listerstellar.fundrising.dto.FundraisingRequestDto;
 import io.github.listerstellar.fundrising.dto.FundraisingResponseDto;
 import io.github.listerstellar.fundrising.entity.Customer;
 import io.github.listerstellar.fundrising.entity.Fundraising;
-import io.github.listerstellar.fundrising.service.CustomerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +15,6 @@ import java.util.stream.Collectors;
 @Component
 @AllArgsConstructor
 public class FundraisingMapper {
-
-    private final CustomerService customerService;
 
     public FundraisingResponseDto toDto(Fundraising fundraising) {
         if (fundraising == null) { return null; }
@@ -38,13 +35,13 @@ public class FundraisingMapper {
         );
     }
 
-    public Fundraising toEntity(FundraisingRequestDto fundraisingRequestDto) {
+    public Fundraising toEntity(FundraisingRequestDto fundraisingRequestDto, Customer customer) {
         if (fundraisingRequestDto == null) { return null; }
         return Fundraising.builder()
                 .name(fundraisingRequestDto.name())
                 .goal(fundraisingRequestDto.goal())
                 .description(fundraisingRequestDto.description())
-                .creator(customerService.getCustomerEntityById(fundraisingRequestDto.creatorId()))
+                .creator(customer)
                 .build();
     }
 }
