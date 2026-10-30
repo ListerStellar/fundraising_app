@@ -1,10 +1,27 @@
 spring:
   application:
     name: fundraising
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/fundraising_db}
+    username: ${SPRING_DATASOURCE_USERNAME:admin}
+    password: ${SPRING_DATASOURCE_PASSWORD:admin}
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true # Zobrazení SQL dotazů v konzoli (pro učební účely)
+    show-sql: true
     properties:
       hibernate:
-        format_sql: true # Zobrazení SQL dotazů v konzoli (pro učební účely)
+        format_sql: true
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+  info:
+    title: Fundraising Platform REST API
+    description: Modern RESTful service for managing charitable fundraisings, donors, and favourites.
+    version: 1.0.0
+    contact:
+      name: Developer
