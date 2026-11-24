@@ -1,6 +1,6 @@
 package io.github.listerstellar.fundraising.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import io.github.listerstellar.fundraising.dto.CustomerRequestDto;
 import io.github.listerstellar.fundraising.entity.Customer;
 import io.github.listerstellar.fundraising.entity.Fundraising;
@@ -29,7 +29,8 @@ class CustomerControllerSystemTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Autowired
     private CustomerRepository customerRepository;
